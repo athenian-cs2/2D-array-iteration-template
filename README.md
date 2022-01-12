@@ -1,6 +1,6 @@
-# Week 2 Day 1: 2D Array Practice
+# Week 2 Day 2: 2D Array Advanced Iteration
 
-In class today, you'll be writing some code to practice working with 2D Arrays
+In class today, you'll be writing some more code to practice iterating through 2D arrays. 
 
 Instructions for the in-class work and the homework can be found on Canvas. 
 

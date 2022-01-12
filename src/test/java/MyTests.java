@@ -5,181 +5,150 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MyTests {
-
     @Test
-    public void testCountOdds() {
-        int[][] m1 = {
-                {1,  2,  4,  6},
-                {7,  9,  10, 12},
-                {14, 15, 17, 18},
-                {22, 23, 27, 30}
-        };
+    public void testFindLastWord() {
+        String[] arr1 = {"apple", "banana", "orange"};
+        String[] arr2 = {"orange", "apple", "banana"};
+        String[] arr3 = {"aardvark", "apple", "acai"};
+        String[] arr4 = {"hello", "world", "computer", "science", "java"};
 
-        int[][] m2 = {
-                {42, 37, 23, -5,  9},
-                {11,  6, 22, 12, 13},
-                {14,  5, 17, 13, 20},
-                {1,   4, 27,  7, 32},
-                {21, -3,  5,  7, 99},
-                {6,  2,  38,  1, 44} };
-
-        assertEquals(7, MyMain.countOdds(m1),"The expected output for the number of odds in \nm1 = { {1,  2,  4,  6}, \n       {7,  9,  10, 12},\n       {14, 15, 17, 18},\n       {22, 23, 27, 30} }; should be: " + 7);
-        assertEquals(18, MyMain.countOdds(m2), "The expected output for the mean of odds in \nm2 = { {42, 37, 23, -5,  9}, \n       {11,  6, 22, 12, 13},\n       {14,  5, 17, 13, 20},\n       {1,   4, 27,  7, 32},\n       {21, -3,  5,  7, 99},\n       {6,  2,  38,  1, 44}}; should be: " + 19.24);
+        assertEquals("orange", MyMain.findLastWord(arr1),"The last word in " + Arrays.toString(arr1) + " should be: " + "orange");
+        assertEquals("orange", MyMain.findLastWord(arr2),"The last word in " + Arrays.toString(arr2) + " should be: " + "orange");
+        assertEquals("apple", MyMain.findLastWord(arr3),"The last word in " + Arrays.toString(arr3) + " should be: " + "orange");
+        assertEquals("world", MyMain.findLastWord(arr4),"The last word in " + Arrays.toString(arr4) + " should be: " + "world");
     }
 
     @Test
-    public void testFindLargest() {
-        int[][] m1 = {
-                {1,  2,  4,  6},
-                {7,  9,  10, 12},
-                {14, 15, 17, 18},
-                {22, 23, 27, 30}
+    public void testFindLastWord2D() {
+        String[][] mat1 = {  {"apple", "banana", "orange"},
+                             {"kiwi", "grapefruit", "fig"},
+                             {"lemon", "lime", "pomelo"}
         };
 
+        String[] arr1 = {"orange", "kiwi", "pomelo"};
+
+        assertEquals(Arrays.toString(arr1), Arrays.toString(MyMain.findLastWord2D(mat1)),"The last words in \n" + Arrays.deepToString(mat1) + "\nshould be: " + Arrays.toString(arr1));
+    }
+
+    @Test
+    public void testAppleCounter() {
+        String[][] mat1 = {  {"apple", "banana", "fig"},
+                             {"kiwi", "pineapple", "applesauce"},
+                             {"crabapple", "lime", "pomelo"}
+        };
+
+        assertEquals(2, MyMain.appleCounter(mat1, 0),"The number of apple words in col 0 of \n" + Arrays.deepToString(mat1) + "\nshould be: " + 2);
+        assertEquals(1, MyMain.appleCounter(mat1, 1),"The number of apple words in col 1 of \n" + Arrays.deepToString(mat1) + "\nshould be: " + 1);
+        assertEquals(1, MyMain.appleCounter(mat1, 2),"The number of apple words in col 2 of \n" + Arrays.deepToString(mat1) + "\nshould be: " + 1);
+    }
+
+    @Test
+    public void findMostAppleColumn() {
+        String[][] mat1 = {  {"apple", "banana", "fig"},
+                {"kiwi", "pineapple", "applesauce"},
+                {"crabapple", "lime", "pomelo"}
+        };
+
+        String[][] mat2 = {  {"apple", "banana", "fig"},
+                {"kiwi", "pineapple", "applesauce"},
+                {"crabapple", "lime", "pomelo"},
+                {"orange", "lime", "apples"},
+                {"orange", "lime", "twoapples"}
+        };
+
+        assertEquals(0, MyMain.findMostAppleColumn(mat1),"The column with the most apple words in \n" + Arrays.deepToString(mat1) + "\nshould be: " + 0);
+        assertEquals(2, MyMain.findMostAppleColumn(mat2),"The column with the most apple words in \n" + Arrays.deepToString(mat2) + "\nshould be: " + 2);
+    }
+
+    @Test
+    public void testPascal() {
+        // Here are some examples:
+        // pascalTriangle(2) =>
+        // 1  0
+        // 1  1
+
+        // pascalTriangle(6) =>
+        // 1  0  0  0  0  0
+        // 1  1  0  0  0  0
+        // 1  2  1  0  0  0
+        // 1  3  3  1  0  0
+        // 1  4  6  4  1  0
+        // 1  5  10 10 5  1
+
+        int[][] m1 = {
+                {1, 0},
+                {1, 1}};
+
         int[][] m2 = {
-                {42, 37, 23, -5,  9},
-                {11,  6, 22, 12, 13},
-                {14,  5, 17, 13, 20},
-                {1,   4, 27,  7, 32},
-                {21, -3,  5,  7, 99},
-                {6,  2,  38,  1, 44} };
+                {1, 0, 0, 0, 0, 0},
+                {1, 1, 0, 0, 0, 0},
+                {1, 2, 1, 0, 0, 0},
+                {1, 3, 3, 1, 0, 0},
+                {1, 4, 6, 4, 1, 0},
+                {1, 5, 10, 10, 5, 1}};
+
+        assertEquals(Arrays.deepToString(m1), Arrays.deepToString(MyMain.pascal(2)),"A pascal triangle of height 2 should look like" + Arrays.deepToString(m1));
+        assertEquals(Arrays.deepToString(m2), Arrays.deepToString(MyMain.pascal(6)),"A pascal triangle of height 6 should look like" + Arrays.deepToString(m2));
+    }
+
+
+    @Test
+    public void testIsMagic() {
+        int[][] m1 = {
+                {4, 9, 2},
+                {3, 5, 7},
+                {8, 1, 6}};
+
+
+        int[][] m2 = {
+                { 2, 16, 13,  3},
+                {11,  5,  8, 10},
+                { 7,  9, 12,  6},
+                {14,  4,  1, 15}};
 
         int[][] m3 = {
-                {-2147483648, -2147483646},
-                {-2147483645, -2147483647} };
+                { 1, 23, 16,  4, 21},
+                {15, 14,  7, 18, 11},
+                {24, 17, 13,  9,  2},
+                {20,  8, 19, 12,  6},
+                { 5,  3, 10, 22, 25}};
 
-        assertEquals(30, MyMain.findLargest(m1),"The expected output for the largest number in \nm1 = { {1,  2,  4,  6}, \n       {7,  9,  10, 12},\n       {14, 15, 17, 18},\n       {22, 23, 27, 30} }; should be: " + 30);
-        assertEquals(99, MyMain.findLargest(m2), "The expected output for the largest number in \nm2 = { {42, 37, 23, -5,  9}, \n       {11,  6, 22, 12, 13},\n       {14,  5, 17, 13, 20},\n       {1,   4, 27,  7, 32},\n       {21, -3,  5,  7, 99},\n       {6,  2,  38,  1, 44}}; should be: " + 99);
-        assertEquals(-2147483645, MyMain.findLargest(m3), "The expected output for the largest number in \nm3 = { {-2147483648, -2147483646}, \n       {-2147483645, -2147483647} }; should be: " + -2147483645);
-    }
-
-    public static boolean equal2DArrays(int[][] arr1, int[][] arr2) {
-        if (arr1 == null || arr2 == null) {
-            return false;
-        }
-
-        if (arr1.length != arr2.length && arr1[0].length != arr2[0].length) {
-            return false;
-        }
-
-        for (int row = 0; row < arr1.length; row++) {
-            for (int col = 0; col < arr1[0].length; col++) {
-                if (arr1[row][col] != arr2[row][col]) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    @Test
-    public void testLeftShift() {
-        int[][] m1 = {
-                {1,  2,  4,  6},
-                {7,  9,  10, 12},
-                {14, 15, 17, 18},
-                {22, 23, 27, 30}
+        // rows all same total, but not cols
+        int[][] m4 = {
+                {100, 101, 99, 100},
+                {98,  99,  100, 103},
+                {106, 94, 103, 97},
+                {100, 100, 100, 100}
         };
 
-        int[][] m1l = {
-                {2,  4,  6,  1},
-                {9,  10, 12, 7},
-                {15, 17, 18, 14},
-                {23, 27, 30, 22}
+        // rows and cols all same total, but not diagonals
+        int[][] m5 = {
+                {1, 2, 3, 4},
+                {2, 3, 4, 1},
+                {3, 4, 1, 2},
+                {4, 1, 2, 3}
         };
 
-        int[][] m2 = {
+        int[][] m6 = {
                 {42, 37, 23, -5,  9},
                 {11,  6, 22, 12, 13},
                 {14,  5, 17, 13, 20},
                 {1,   4, 27,  7, 32},
-                {21, -3,  5,  7, 99},
                 {6,  2,  38,  1, 44} };
 
-        int[][] m2l = {
+        int[][] m7 = {
                 {37, 23, -5,  9, 42},
                 { 6, 22, 12, 13, 11},
                 { 5, 17, 13, 20, 14},
                 { 4, 27,  7, 32,  1},
-                {-3,  5,  7, 99, 21},
                 {2,  38,  1, 44,  6} };
 
-        int[][] shifted1 = MyMain.leftShift(m1);
-        int[][] shifted2 = MyMain.leftShift(m2);
-
-        assertEquals(true, equal2DArrays(m1l, shifted1),"The array should have looked like:\n" + Arrays.deepToString(m1l) + "\n but instead, it looked like:\n" + Arrays.deepToString(shifted1));
-        assertEquals(true, equal2DArrays(m2l, shifted2),"The array should have looked like:\n" + Arrays.deepToString(m2l) + "\n but instead, it looked like:\n" + Arrays.deepToString(shifted2));
-    }
-
-    @Test
-    public void testArrayBuilder() {
-        int[][] m1 = {
-                {0, 1},
-                {1, 2} };
-
-
-        int[][] m2 = {
-                {0, 1, 2},
-                {1, 2, 3},
-                {2, 3, 4}};
-
-        assertEquals(true, equal2DArrays(m1, MyMain.arrayBuilder(2)),"The array should have looked like:\n" + Arrays.deepToString(m1) + "\n but instead, it looked like:\n" + Arrays.deepToString(MyMain.arrayBuilder(2)));
-        assertEquals(true, equal2DArrays(m2, MyMain.arrayBuilder(3)),"The array should have looked like:\n" + Arrays.deepToString(m2) + "\n but instead, it looked like:\n" + Arrays.deepToString(MyMain.arrayBuilder(3)));
-    }
-
-    @Test
-    public void testMean() {
-        double[][] m1 = {
-            {1,  2,  4,  6},
-            {7,  9,  10, 12},
-            {14, 15, 17, 18},
-            {22, 23, 27, 30}
-        };
-
-        double[][] m2 = { {1,  2,  4,  5,  6},
-                          {7,  9,  10, 12, 13},
-                          {14, 15, 17, 18, 20},
-                          {22, 23, 27, 30, 32},
-                          {33, 37, 38, 42, 44} };
-
-        assertEquals(13.5625, MyMain.mean(m1), 0.1, "The expected output for the mean of double[][] \nm1 = { {1,  2,  4,  6}, \n       {7,  9,  10, 12},\n       {14, 15, 17, 18},\n       {22, 23, 27, 30} }; should be: " + 13.5625);
-        assertEquals(19.24, MyMain.mean(m2), 0.1, "The expected output for the mean of double[][] \nm2 = { {1,  2,  4,  5,  6}, \n       {7,  9,  10, 12, 13},\n       {14, 15, 17, 18, 20},\n       {22, 23, 27, 30, 32},\n       {33, 37, 38, 42, 44} }; should be: " + 19.24);
-    }
-
-    @Test
-    public void testMedian() {
-        double[][] m1 = {
-            {1,  2,  4,  6},
-            {7,  9,  10, 12},
-            {14, 15, 17, 18},
-            {22, 23, 27, 30}
-        };
-
-        double[][] m2 = { {1,  2,  4,  5,  6},
-                          {7,  9,  10, 12, 13},
-                          {14, 15, 17, 18, 20},
-                          {22, 23, 27, 30, 32},
-                          {33, 37, 38, 42, 44} };
-
-        double[][] m3 = { {1,  3,  4,  5},
-                          {7,  9,  10, 12},
-                          {14, 15, 17, 18} };
-
-        assertEquals(13.0, MyMain.median(m1), 0.1, "The expected output for the median of double[][] \nm1 = { {1,  2,  4,  6}, \n       {7,  9,  10, 12},\n       {14, 15, 17, 18},\n       {22, 23, 27, 30} }; should be: " + 13.0);
-        assertEquals(17.0, MyMain.median(m2), 0.1, "The expected output for the median of double[][] \nm2 = { {1,  2,  4,  5,  6}, \n       {7,  9,  10, 12, 13},\n       {14, 15, 17, 18, 20},\n       {22, 23, 27, 30, 32},\n       {33, 37, 38, 42, 44} }; should be: " + 17.0);
-        assertEquals(9.5, MyMain.median(m3), 0.1, "The expected output for the median of double[][] \nm3 = { {1,  3,  4,  5}, \n       {7,  9,  10, 12},\n       {14, 15, 17, 18} }; should be: " + 9.5);
-    }
-
-    @Test
-    public void testMode() {
-        double[][] m4 = { {1,  2,  2,  2,  6},
-                          {7,  9,  10, 11, 11},
-                          {11, 11, 17, 18, 20} };
-
-        assertEquals(11.0, MyMain.mode(m4), 0.1, "The expected output for the mode of double[][] \nm4 = { {1,  2,  2,  2,  6}, \n       {7,  9,  10, 11, 11},\n       {11, 11, 17, 18, 20} }; should be: " + 11.0);
-        
-        double[][] m5 = { {1,  1,  1,  1,  1} };
-        assertEquals(1.0, MyMain.mode(m5), 0.1, "The expected output for the mode of double[][] m5 = { {1,  1,  1,  1,  1} }; should be: " + 1.0);
+        assertEquals(true, MyMain.isMagic(m1),"Testing whether the array:\n" + Arrays.deepToString(m1) + "\n is magic should be: " + true);
+        assertEquals(true, MyMain.isMagic(m2),"Testing whether the array:\n" + Arrays.deepToString(m2) + "\n is magic should be: " + true);
+        assertEquals(true, MyMain.isMagic(m3),"Testing whether the array:\n" + Arrays.deepToString(m3) + "\n is magic should be: " + true);
+        assertEquals(false, MyMain.isMagic(m6),"Testing whether the array:\n" + Arrays.deepToString(m6) + "\n is magic should be: " + false);
+        assertEquals(false, MyMain.isMagic(m7),"Testing whether the array:\n" + Arrays.deepToString(m7) + "\n is magic should be: " + false);
+        assertEquals(false, MyMain.isMagic(m4),"Testing whether the array:\n" + Arrays.deepToString(m4) + "\n is magic should be: " + false);
+        assertEquals(false, MyMain.isMagic(m5),"Testing whether the array:\n" + Arrays.deepToString(m5) + "\n is magic should be: " + false);
     }
 }
